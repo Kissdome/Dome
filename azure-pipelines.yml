@@ -1,14 +1,9 @@
 # Universal Windows Platform
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure for Students (b09fe93a-a5b8-440a-a293-5d8e81a47281)'
-    appType: 'webApp'
-    WebAppName: 'CIDC'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
 # Build a Universal Windows Platform project using Visual Studio.
 # Add steps that test and distribute an app, save build artifacts, and more:
 # https://aka.ms/yaml
+
 
 trigger:
 - master
@@ -35,3 +30,11 @@ steps:
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure for Students (b09fe93a-a5b8-440a-a293-5d8e81a47281)'
+    appType: 'webApp'
+    WebAppName: 'CIDC'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
